@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AboutMe</string>
+    <string name="star_img">star_image</string>
+    <string name="myname">Thita Charon</string>
+    <string name="bio_text">Hi My name is Thita Charon\n I was born in Bangkok. I live in New York since 2011.</string>
+    <string name="nickname">What is your nickname?</string>
+    <string name="btn_text">DONE</string>
+</resources>
