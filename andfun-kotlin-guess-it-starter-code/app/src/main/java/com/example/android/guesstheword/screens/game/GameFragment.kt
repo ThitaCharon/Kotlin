@@ -17,6 +17,7 @@
 package com.example.android.guesstheword.screens.game
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,10 +57,11 @@ class GameFragment : Fragment() {
         // Get the viewmodel
         Timber.i("Called ViewModelProviders.of")
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+        binding.gameViewModelXML = viewModel
+       // binding.setLifecycleOwner(this)
 
-
-        binding.correctButton.setOnClickListener { viewModel.onCorrect() }
-        binding.skipButton.setOnClickListener { viewModel.onSkip() }
+//        binding.correctButton.setOnClickListener { viewModel.onCorrect() }
+//        binding.skipButton.setOnClickListener { viewModel.onSkip() }
 
         // connect to the Livedata
         viewModel.score.observe(this, Observer { newScore ->
@@ -70,9 +72,15 @@ class GameFragment : Fragment() {
             binding.wordText.text = newWord
         })
 
+        viewModel.currentTime.observe(this, Observer { newCurrentTime ->
+            binding.timerText.text = DateUtils.formatElapsedTime(newCurrentTime)
+        })
+
         viewModel.gameFinished.observe(this, Observer { hasFinished ->
             if(hasFinished) {
-                gameFinished()
+                val currentScore = viewModel.score.value ?:0
+                val action = GameFragmentDirections.actionGameToScore(currentScore)
+                findNavController(this).navigate(action)
                 viewModel.completeTheGame()
             }
         })
@@ -85,11 +93,13 @@ class GameFragment : Fragment() {
     /**
      * Called when the game is finished
      */
+/*
     private fun gameFinished() {
         Toast.makeText(this.activity,"Game Finished!",Toast.LENGTH_SHORT ).show()
         val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?:0)
         findNavController(this).navigate(action)
     }
+*/
 
 
 
