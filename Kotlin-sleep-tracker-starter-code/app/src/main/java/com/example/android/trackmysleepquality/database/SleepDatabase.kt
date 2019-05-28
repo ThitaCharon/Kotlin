@@ -21,6 +21,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+/**
+ * Concepts of using RoomDatabase -> Room will recreate on instance db only it is not created
+ */
+
 @Database(entities = [SleepNight::class], version = 1, exportSchema = false)
 abstract class SleepDatabase : RoomDatabase() {
 

@@ -19,6 +19,10 @@ package com.example.android.trackmysleepquality.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+/**
+ * Concepts of using Dao -> access to the database
+ */
+
 @Dao
 interface SleepDatabaseDao{
     //Insert
